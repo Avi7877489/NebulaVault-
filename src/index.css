@@ -2,11 +2,188 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Custom CSS Variables for NebulaVault Theme */
+:root {
+  --nebula-primary: #0f0f23;
+  --nebula-secondary: #1a1a2e;
+  --nebula-accent: #16213e;
+  --nebula-highlight: #00d4ff;
+  --nebula-text: #e0e0e0;
+  --nebula-text-secondary: #a0a0a0;
+  --nebula-border: #2a2a4e;
+  --nebula-success: #00ff88;
+  --nebula-warning: #ffaa00;
+  --nebula-error: #ff4444;
+  --nebula-shadow: rgba(0, 212, 255, 0.1);
+  --nebula-glow: rgba(0, 212, 255, 0.3);
+}
+
+/* Global Styles */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, var(--nebula-primary) 0%, var(--nebula-secondary) 50%, var(--nebula-accent) 100%);
+  color: var(--nebula-text);
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Custom Components */
+.nebula-card {
+  background: rgba(26, 26, 46, 0.8);
+  border: 1px solid var(--nebula-border);
+  border-radius: 12px;
+  box-shadow: 0 8px 32px var(--nebula-shadow);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.nebula-card:hover {
+  border-color: var(--nebula-highlight);
+  box-shadow: 0 12px 40px var(--nebula-glow);
+  transform: translateY(-2px);
+}
+
+.nebula-button {
+  background: linear-gradient(135deg, var(--nebula-accent) 0%, var(--nebula-secondary) 100%);
+  border: 1px solid var(--nebula-border);
+  color: var(--nebula-text);
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.nebula-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, var(--nebula-glow), transparent);
+  transition: left 0.5s;
+}
+
+.nebula-button:hover::before {
+  left: 100%;
+}
+
+.nebula-button:hover {
+  border-color: var(--nebula-highlight);
+  box-shadow: 0 0 20px var(--nebula-glow);
+  transform: translateY(-1px);
+}
+
+.nebula-button.active {
+  background: linear-gradient(135deg, var(--nebula-highlight) 0%, var(--nebula-accent) 100%);
+  color: var(--nebula-primary);
+}
+
+.nebula-input {
+  background: rgba(26, 26, 46, 0.8);
+  border: 1px solid var(--nebula-border);
+  border-radius: 8px;
+  color: var(--nebula-text);
+  padding: 12px 16px;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.nebula-input:focus {
+  outline: none;
+  border-color: var(--nebula-highlight);
+  box-shadow: 0 0 0 3px var(--nebula-glow);
+}
+
+.nebula-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.nebula-scrollbar::-webkit-scrollbar-track {
+  background: var(--nebula-secondary);
+  border-radius: 4px;
+}
+
+.nebula-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--nebula-accent);
+  border-radius: 4px;
+}
+
+.nebula-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: var(--nebula-highlight);
+}
+
+/* Animations */
 @keyframes flicker {
-  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {opiacity: 1;}
-  20%, 22%, 24%, 55% {opacity: 0.2;}
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 1; }
+  20%, 22%, 24%, 55% { opacity: 0.2; }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 5px var(--nebula-highlight), 0 0 10px var(--nebula-highlight), 0 0 15px var(--nebula-highlight);
+  }
+  50% {
+    box-shadow: 0 0 10px var(--nebula-highlight), 0 0 20px var(--nebula-highlight), 0 0 30px var(--nebula-highlight);
+  }
+}
+
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .flicker {
   animation: flicker 1s infinite;
+}
+
+.pulse-glow {
+  animation: pulse-glow 2s infinite;
+}
+
+.slide-in {
+  animation: slide-in 0.5s ease-out;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .nebula-card {
+    margin: 0 10px;
+  }
+
+  .nebula-button {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+}
+
+/* Utility Classes */
+.glass-effect {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.text-glow {
+  text-shadow: 0 0 10px var(--nebula-highlight);
+}
+
+.border-glow {
+  border: 1px solid var(--nebula-highlight);
+  box-shadow: 0 0 10px var(--nebula-glow);
 }

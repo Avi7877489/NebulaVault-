@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { db } from "./firebase";
+import { database as db } from "./firebase";
 import { ref, onValue, push } from "firebase/database";
 
 const PAGE_SIZE = 10;
@@ -112,11 +112,11 @@ export default function UniverseTab({ universe }) {
   };
 
   return (
-    <div>
-      <div className="flex justify-between items-center mb-3 gap-4 flex-wrap">
+    <div className="slide-in">
+      <div className="flex justify-between items-center mb-6 gap-4 flex-wrap">
         <button
           onClick={addItem}
-          className="px-3 py-1 bg-green-600 rounded hover:bg-green-500 transition"
+          className="nebula-button"
         >
           Add {universe}
         </button>
@@ -125,10 +125,10 @@ export default function UniverseTab({ universe }) {
           type="text"
           placeholder={`Search ${universe}`}
           onChange={handleSearch}
-          className="px-2 py-1 rounded bg-gray-800 text-white"
+          className="nebula-input flex-1 min-w-0"
         />
 
-        <label className="flex items-center gap-2">
+        <label className="flex items-center gap-2 text-sm">
           Temporal Freeze
           <input
             type="checkbox"
@@ -137,12 +137,13 @@ export default function UniverseTab({ universe }) {
               setTemporalFreeze(e.target.checked);
               if (!e.target.checked) flushBuffer();
             }}
+            className="w-4 h-4 accent-current"
           />
         </label>
 
         <div
           className={`w-4 h-4 rounded-full ${
-            pulse ? "bg-lime-400 shadow-lg flicker" : "bg-gray-600"
+            pulse ? "pulse-glow bg-green-400" : "bg-gray-600"
           }`}
         />
       </div>
@@ -150,33 +151,33 @@ export default function UniverseTab({ universe }) {
       <div
         ref={scrollRef}
         onScroll={handleScroll}
-        className="border p-2 h-64 overflow-y-auto bg-gray-900 rounded mb-2"
+        className="nebula-card p-4 h-80 overflow-y-auto nebula-scrollbar mb-6"
       >
         {paginatedItems.map((item) => (
           <div
             key={item.id}
-            className="p-1 border-b border-gray-700 hover:bg-gray-800 transition"
+            className="p-3 mb-2 border-b border-gray-700 hover:bg-gray-800 transition rounded nebula-card"
           >
             {item.name}
           </div>
         ))}
       </div>
 
-      <div className="flex justify-between">
+      <div className="flex justify-between items-center">
         <button
           disabled={page <= 1}
           onClick={() => setPage((p) => p - 1)}
-          className="px-3 py-1 bg-gray-700 rounded disabled:opacity-50 hover:bg-gray-600 transition"
+          className="nebula-button disabled:opacity-50 disabled:cursor-not-allowed"
         >
           Previous
         </button>
-        <span>
+        <span className="text-sm font-medium">
           Page {page} / {totalPages || 1}
         </span>
         <button
           disabled={page >= totalPages}
           onClick={() => setPage((p) => p + 1)}
-          className="px-3 py-1 bg-gray-700 rounded disabled:opacity-50 hover:bg-gray-600 transition"
+          className="nebula-button disabled:opacity-50 disabled:cursor-not-allowed"
         >
           Next
         </button>

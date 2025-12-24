@@ -1,26 +1,32 @@
-import React from 'react'
-
+import React, { useState } from 'react'
+import UniverseTab from './UniverseTab'
 
 
 const UNIVERSSES = ["Artifacts", "Creatures", "Logs"]
 
 
 const App = () => {
+
+  const [currentTab, setCurrentTab] = useState(UNIVERSSES[0]);
   return (
-    <div className="app p-6 bg-black text-white min-h-screen">
-      <h1 className="text-3xl font-mono mb-4">Welcome to NebulaVault</h1>
-      <div className="flex gap-4 mb-6">
+    <div className="app p-6 min-h-screen slide-in">
+      <h1 className="text-4xl font-bold mb-6 text-center text-glow font-mono">
+        Welcome to NebulaVault
+      </h1>
+      <div className="flex gap-4 mb-8 justify-center flex-wrap">
         {UNIVERSSES.map((tab) => (
           <button
             key={tab}
-            className={`px-4 py-2 rounded font-semibold ${currentTab === tab ? "bg-blue-600" : "bg-grey-800"
-              } hover:bg-blue-500 transition`}
+            className={`nebula-button ${currentTab === tab ? 'active' : ''}`}
+            onClick={() => setCurrentTab(tab)}
           >
             {tab}
           </button>
         ))}
       </div>
-      
+      <div className="nebula-card p-6 max-w-4xl mx-auto">
+        <UniverseTab universe={currentTab} />
+      </div>
     </div>
   )
 }
