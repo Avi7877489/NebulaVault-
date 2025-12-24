@@ -3,10 +3,10 @@ import {getDatabase} from "firebase/database";
 
 
 const firebaseConfig = {
-    apiKey: "AIzaSyD-EXAMPLE-KEY",
-    authDomain: "nebulavault.firebaseapp.com",
-    databaseURL: "https://nebulavault-default-rtdb.firebaseio.com",
-    projectId: "nebulavault",
+    apiKey: "AIzaSyCSbJi_eq6wAkCmObY_jZEWYyUECZK8X2w",
+    authDomain: "react-305.firebaseapp.com",
+    databaseURL: "https://react-305-default-rtdb.firebaseio.com",
+    projectId: "react-305",
 }
 
 const app = initializeApp(firebaseConfig);
